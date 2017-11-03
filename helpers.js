@@ -39,5 +39,9 @@ const icon = function(dataPoint) {
     case "partly-cloudy-night":
       return "<i class='fa fa-cloud'></i>";
       break;
+    case "fog":
+      return "<i class='fa fa-ioxhost'></i>";
+      break;
+      // Added logic for foggy, icon not originally defined in DataPoint Function
   }
 }

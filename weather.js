@@ -33,18 +33,35 @@ let handleWeatherResponse = function(response) {
   window.response = response
 
 $(".forecast").empty();
+$(".currently").empty();
+// function address"(" + response.latitude + ", " + response.longitude + ")";
+
+let markupCurrently = "";
+
+markupCurrently+= "<div class='col-12'>";
+// markupCurrently+= "<h2 id='formatted_address'>" + response.formatted_address + "</h2>";
+// markupCurrently+= "<h5 class='daily-time'>"
+// + response.currently.time
+// + "</h5>";
+markupCurrently+= "<h3 class='daily-icon'></i>"
++ icon(response.currently)
++ "</h3>";
+markupCurrently+= "<h4 class='daily-high'>"
+  + Math.round(response.currently.temperature)
+  + " and " + response.currently.summary + "</h4>";
+markupCurrently+= "</div></div></div>";
 
 let markup = "";
+
   for(let i=1; i<=6; i++) {
 
     markup+= "<div class='col-2'>";
-    markup+= "<h5 class='daily-icon'></i>"
-    + Date(response.daily.data[i].time)
-    // Need to figure out how to convert time to day of week
+    // markup+= "<h5 class='daily-time'>"
+    // + response.daily.data[i].time
+    // Need to figure out how to convert time properly, always showing current date, not dynamic.
     + "</h5>";
     markup+= "<h3 class='daily-icon'></i>"
     + icon(response.daily.data[i])
-    // Need to figure out how to pull the appropriate icon
     + "</h3>";
     markup+= "<h4 class='daily-high'>"
       + Math.round(response.daily.data[i].temperatureHigh)
@@ -56,7 +73,11 @@ let markup = "";
 
   }
   $(".forecast").append(markup);
+  $(".currently").append(markupCurrently);
+
+  $(".currently").fadeIn(2000);
   $(".forecast").fadeIn(2000);
+  $(".address_header").fadeIn(2000);
   // **** your code starts here - don't modify anything else. you will be sad.
 
 
